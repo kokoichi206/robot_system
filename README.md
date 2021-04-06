@@ -109,6 +109,7 @@ rsync -av ./scraping/ ubuntu@192.168.3.7
 APT, Advanced Packaging Tool
 
 
+***
 
 ## Git
 バージョン管理システム
@@ -129,7 +130,37 @@ Gitを利用したサービス
 「リポジトリ」のホスティングと公開、コミュニケーション
 ```
 git clone https://github.com/kokoichi206/robot_system.git
+git add -A
+git status
+git commit -m "Add a note"
+git push
 ``` 
+### ブランチ
+第3回の授業
+- ディレクトリの中の状態を分岐したもの
+```
+git branch
+git checkout -b dev
+git checkout main
+```
+うまくいったブランチをmainにしたい
+```
+git merge dev
+```
+
+ローカルを最新のgitにしたい
+```
+git pull
+```
+
+### コミットログ
+git commit
+->
+1行目に変更点を動詞で
+3行目に理由を
+
+### GitHub Pages
+[公開のための参考サイト](https://qiita.com/tonkotsuboy_com/items/f98667b89228b98bc096)
 
 
 ## やりたいこと
@@ -137,4 +168,4 @@ git clone https://github.com/kokoichi206/robot_system.git
 - vimtutor
 
 
-
+ 
