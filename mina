@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo bashです
+sleep 10
+exec sleep 100	# このプロセス自体がsleepになる
+echo これは実行されない:
