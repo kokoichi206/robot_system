@@ -20,7 +20,8 @@
 
 ## markdown to slide  
 - gitHub pages の利用  
-    - [見た目のイメージ](https://kokoichi206.github.io/robot_system/first)  
+    - [見た目のイメージ sample](https://kokoichi206.github.io/robot_system/first)  
+    - [見た目のイメージ note 1](https://kokoichi206.github.io/robot_system/first/note)  
 
 [このサイト](https://qiita.com/natsumo/items/717e40de2c43824624b6)を参考にしたら、markdownでスライドを表示できるようにはなった。  
 
