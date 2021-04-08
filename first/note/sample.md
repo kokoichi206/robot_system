@@ -8,8 +8,7 @@ class: center, middle, inverse
 - ソフト：UNIX、Linux  
 - サービス：GitHub  
 - ロボット：TurtleBot、Cart-mini、HSR、  
-  
----  
+---
 layout: false
 
 ## Raspberry Pi  
