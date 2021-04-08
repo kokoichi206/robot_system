@@ -63,6 +63,10 @@ pstree -a
 その他  
 - ファイルもプロセスも木構造で管理されている  
   
+### apt  
+APT, Advanced Packaging Tool  
+ 
+ 
 ### command  
 ```  
 ls /bin/ | grep ls  
@@ -92,9 +96,7 @@ rsync -av ./scraping/ ubuntu@192.168.3.7
   
 ```  
   
-### apt  
-APT, Advanced Packaging Tool  
-  
+ 
   
 ***  
   
