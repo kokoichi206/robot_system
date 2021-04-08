@@ -5,6 +5,8 @@
 - サービス：GitHub  
 - ロボット：TurtleBot、Cart-mini、HSR、  
   
+---  
+
 ## Raspberry Pi  
 シングルボードコンピュータ  
 性能というよりもプラットフォームとして非常に優秀  
@@ -157,7 +159,7 @@ git commit
     - git checkout 7cbb04c  
   
   
--------  
+---  
 ## Linux  
 ### OS  
 - ハードウェアの複雑さを隠すためのソフトウェア階層  
