@@ -1,171 +1,48 @@
-# ロボットシステム学講義
-- 上田隆一さんの[youtube](https://www.youtube.com/watch?v=twM88vv21LM&list=PLbUh9y6MXvjdIB5A9uhrZVrhAaXc61Pzz&index=1)のノート
+# ロボットシステム学講義  
+- 上田隆一さんの[youtube](https://www.youtube.com/watch?v=twM88vv21LM&list=PLbUh9y6MXvjdIB5A9uhrZVrhAaXc61Pzz&index=1)のノート  
+  
+## 講義の目的  
+1つのシングルボードコンピュータを深く理解  
+- 低レイヤー  
+    - OSの仕組み  
+    - デバイスドライバ作成  
+- 高レイヤー  
+    - ROSのモジュール作成  
+- 社会的レイヤー  
+    - 開発方法（Git、GitHub）  
+    - 著作権やライセンス  
+      
+### 必要なもの  
+- USBケーブル  
+- microSDカード（16GB）  
+- LANケーブル  
+  
 
-## 開発における手っ取り早さの実現
-プラットフォームの存在
-- ハード：PC、Raspberry Pi、Arduino
-- ソフト：UNIX、Linux
-- サービス：GitHub
-- ロボット：TurtleBot、Cart-mini、HSR、
+## markdown to slide  
+- gitHub pages の利用  
+    - [見た目のイメージ](https://kokoichi206.github.io/robot_system/first)  
 
-## Raspberry Pi
-シングルボードコンピュータ
-性能というよりもプラットフォームとして非常に優秀
-イギリスで開発された教育用のシングルボードコンピュータ
-安価でハードの制御ができるような目的、2009-
-2016に1000万台販売
+[このサイト](https://qiita.com/natsumo/items/717e40de2c43824624b6)を参考にしたら、markdownでスライドを表示できるようにはなった。  
 
-## 講義の目的
-1つのシングルボードコンピュータを深く理解
-- 低レイヤー
-    - OSの仕組み
-    - デバイスドライバ作成
-- 高レイヤー
-    - ROSのモジュール作成
-- 社会的レイヤー
-    - 開発方法（Git、GitHub）
-    - 著作権やライセンス
-    
-### 必要なもの
-- USBケーブル
-- microSDカード（16GB）
-- LANケーブル
+## markdownのファイルの改行の前に半角スペース2ついれるshellScript  
+- 目的：vscodeのプレビューだと改行前にスペース入れなくても正しく改行されるが、giHub pagesにアップしたときは（普通は）そうではない  
 
-## Install Ubuntu on Raspberry Pi
-ubuntu Raspberry pi と Etcherを利用
+[参考](https://qiita.com/hirohiro77/items/7fe2f68781c41777e507)（sedでスペース置換を探してたら見つけた）  
+> #よく間違うのが's/\n/\r\n/'では置換出来ないので注意  
+sed -i -e 's/$/\r/' source.txt  
 
-## ipアドレス
-```
-ip a
-```
-192.168.3.7 がラズパイのIPアドレス
-他のPCからアクセスする方法
-```
-ssh ubuntu@192.168.3.7
-=> pw: hogehoge
-```
-画面真っ暗になっても、メモリ->SSD間で書き込みをしてるため、すぐは切らない！！
-通信できてるかチェック
-```
-ping 192.168.3.7
-```
+実際のコード  
+```markdownSpace.sh  
+#/bin/bash
 
-## GPIOピン
-40ピン存在する。
-General purpose input output
+# echo $1
+fileName=`echo $1 | sed 's/\.[^\.]*$//'`
+# echo $fileName
+# cat $1 | tr '\n' '  \n' > ${fileName}_revised.md
+sed 's/$/  /g' $1 > ${fileName}_rev.md
+```  
 
-## PC spec
-```
-cat /proc/cpuinfo | less
--> j,k
-free
-ls /dev/mmcblk0*
-uname
-cat /etc/lsb-release
-ps
-ps aux (全プロセス)（[]は実はプロセスじゃない）
-top
-pstree
-pstree -a
-```
-
-## Linuxの世界
-2大重要事項
-- データは全て「ファイル」で保存される
-- プログラムは「プロセス」単位で動く
-その他
-- ファイルもプロセスも木構造で管理されている
-
-### command
-```
-ls /bin/ | grep ls
-echo unko | rev | grep -o .
-find aaa
-grep ubuntu /etc/passwd
-find /
-find / | less
-find / | grep passwd
-'/passwd$'
-cat /etc/services | grep '[^0-9]80/'
-cat /etc/services | grep -C1 '[^0-9]80/'
-```
-通信系
-ping、通信先にパケットが届くか確認する
-```
-ping www.yahoo.co.jp
-ping 8.8.8.8    (google)
-ip addr show
-traceroute 8.8.8.8
-```
-マシン間でファイルをコピー！
-srp,rsync（バックアップ）
-```
-scp record_weight.sh ubuntu@192.168.3.7:~/
-rsync -av ./scraping/ ubuntu@192.168.3.7
-
-```
-
-### apt
-APT, Advanced Packaging Tool
+- $（行末）を\r（CR）で変換しているのに、その結果が\r\n（CR＋LF）になっている点が不思議だが、これはパターンスペースのしわざである  
+- 「sedは読み込んだ行の行末にある改行を削除してパターンスペースと呼ばれるバッファに格納したうえでテキスト処理をし、最後にパターンスペースの内容に改行をつけて出力する」  
 
 
-***
-
-## Git
-バージョン管理システム
-Linus Torvalds が作成
-- Linusさんぶちぎれがち。
-- 有料化にキレて2週間でGit作った。
-
-初期設定
-```
-git config --global user.name "mi"
-git config --global user.email "tt.300607@gmail.com"
-git config --global core.editor vim
-cat .gitconfig
-```
-
-## GitHub
-Gitを利用したサービス
-「リポジトリ」のホスティングと公開、コミュニケーション
-```
-git clone https://github.com/kokoichi206/robot_system.git
-git add -A
-git status
-git commit -m "Add a note"
-git push
-``` 
-### ブランチ
-第3回の授業
-- ディレクトリの中の状態を分岐したもの
-```
-git branch
-git checkout -b dev
-git checkout main
-```
-うまくいったブランチをmainにしたい
-```
-git merge dev
-```
-
-ローカルを最新のgitにしたい
-```
-git pull
-```
-
-### コミットログ
-git commit
-->
-1行目に変更点を動詞で
-3行目に理由を
-
-### GitHub Pages
-[公開のための参考サイト](https://qiita.com/tonkotsuboy_com/items/f98667b89228b98bc096)
-
-
-## やりたいこと
-- /etc/vim をいじる
-- vimtutor
-
-
- 
