@@ -1,3 +1,7 @@
+name: inverse
+layout: true
+class: center, middle, inverse
+---
 ## 開発における手っ取り早さの実現  
 プラットフォームの存在  
 - ハード：PC、Raspberry Pi、Arduino  
@@ -6,6 +10,7 @@
 - ロボット：TurtleBot、Cart-mini、HSR、  
   
 ---  
+layout: false
 
 ## Raspberry Pi  
 シングルボードコンピュータ  
